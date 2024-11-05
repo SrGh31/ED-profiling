@@ -35,11 +35,11 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
         if datasettag=='combinedDataset':
             ax[0].scatter(cluster_center[0], cluster_center[1], s=12, color=col["color"], marker="o", alpha=0.75,
 	            label='C%d (%d), ES:%.2f, LAV:%.2f, SQ48:%.2f'%(k+1, np.sum(class_members),
-		         df['EDEQscore'].iloc[class_members].mean(), df['LAV_Score'].iloc[class_members].mean(),
-		                            df['SQ48score'].iloc[class_members].mean()))
+		         df['EDEQ-Score'].iloc[class_members].mean(), df['Lav-Score'].iloc[class_members].mean(),
+		                            df['SQ48-Score'].iloc[class_members].mean()))
         else:
             ax[0].scatter(cluster_center[0], cluster_center[1], s=12, color=col["color"], marker="o", alpha=0.75,
-	            label='C%d (%d), ES:%.2f'%(k+1, np.sum(class_members),df['EDEQscore'].iloc[class_members].mean()))
+	            label='C%d (%d), ES:%.2f'%(k+1, np.sum(class_members),df['EDEQ-Score'].iloc[class_members].mean()))
         for x in data_to_plot[class_members]:
 	        ax[0].plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], color=col["color"], alpha=0.5)
     ax[0].set_xlabel(fig_lab_titles['ax0_xlab'], fontsize=fs)
@@ -54,7 +54,7 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
     plt.savefig('figs/PDFs/ED_%s_%s.pdf'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
     plt.savefig('figs/PNGs/ED_%s_%s.png'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
     zs_ed_cluster_df=pd.DataFrame.from_dict(zs_cluster_median_profile).T
-    return zs_ed_cluster_df, ed_cluster_df
+    return zs_ed_cluster_df, ed_cluster_df, colors
 
 
 def plot_dendrogram(model, **kwargs):
