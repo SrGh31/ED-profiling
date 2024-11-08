@@ -1,232 +1,232 @@
-intid	EDtype	FA_Agg_Clustering	PCA_Agg_Clustering	FA_GMM_Clustering	PCA_GMM_Clustering
-1491.0	Binge-ED	C4	C1	C4	C3
-1481.0	Anorexia nervosa	C4	C2	C3	C6
-1613.0	Bulimia nervosa	C4	C2	C2	C6
-1387.0	Other ED	C6	C1	C3	C1
-1603.0	Other ED	C7	C2	C2	C5
-1476.0	Anorexia nervosa	C6	C4	C3	C3
-1377.0	Anorexia nervosa	C3	C2	C5	C6
-1551.0	Bulimia nervosa	C7	C2	C2	C5
-1424.0	Binge-ED	C1	C1	C1	C1
-1320.0	Anorexia nervosa	C9	C1	C1	C1
-1446.0	Binge-ED	C9	C2	C1	C1
-1315.0	Anorexia nervosa	C6	C2	C2	C2
-1474.0	Other ED	C1	C2	C1	C1
-1658.0	Others	C1	C2	C1	C6
-1425.0	Others	C3	C2	C2	C6
-1414.0	Other ED	C5	C2	C4	C3
-1132.0	Others	C5	C4	C4	C3
-1460.0	Binge-ED	C4	C1	C1	C1
-1612.0	Binge-ED	C8	C4	C1	C4
-1463.0	Others	C4	C2	C2	C6
-1584.0	Anorexia nervosa	C9	C2	C2	C5
-1669.0	Anorexia nervosa	C1	C1	C1	C4
-1244.0	Others	C9	C1	C1	C1
-1626.0	Others	C4	C1	C1	C1
-1677.0	Anorexia nervosa	C2	C4	C1	C4
-1391.0	Anorexia nervosa	C2	C1	C1	C1
-1536.0	Others	C2	C1	C1	C4
-1525.0	Others	C2	C3	C1	C1
-1556.0	Anorexia nervosa	C2	C2	C3	C2
-1293.0	Binge-ED	C1	C1	C1	C1
-1403.0	Binge-ED	C4	C4	C3	C3
-1547.0	Others	C2	C1	C1	C4
-1583.0	Anorexia nervosa	C4	C2	C2	C5
-1434.0	Binge-ED	C3	C2	C5	C5
-1685.0	Anorexia nervosa	C2	C1	C1	C4
-1412.0	Other ED	C7	C2	C2	C5
-1467.0	Bulimia nervosa	C5	C4	C3	C4
-1559.0	Anorexia nervosa	C3	C2	C5	C5
-1676.0	Anorexia nervosa	C2	C1	C1	C1
-1577.0	Binge-ED	C6	C4	C4	C3
-1686.0	Anorexia nervosa	C2	C3	C1	C1
-1459.0	Others	C7	C2	C2	C6
-1415.0	Others	C4	C2	C2	C6
-1647.0	Anorexia nervosa	C7	C2	C2	C2
-1521.0	Anorexia nervosa	C3	C2	C2	C6
-1586.0	Other ED	C5	C4	C3	C3
-1532.0	Other ED	C3	C1	C5	C5
-1339.0	Anorexia nervosa	C7	C2	C2	C5
-1610.0	Anorexia nervosa	C2	C4	C1	C1
-1530.0	Binge-ED	C3	C2	C4	C5
-1232.0	Anorexia nervosa	C4	C2	C2	C5
-1707.0	Others	C3	C2	C2	C6
-1649.0	Bulimia nervosa	C2	C3	C1	C1
-1643.0	Bulimia nervosa	C7	C2	C2	C6
-1659.0	Anorexia nervosa	C3	C2	C3	C6
-1347.0	Other ED	C1	C1	C1	C1
-1581.0	Bulimia nervosa	C2	C4	C4	C3
-1575.0	Bulimia nervosa	C8	C4	C3	C4
-1479.0	Other ED	C2	C4	C1	C4
-1555.0	Binge-ED	C3	C2	C4	C5
-1461.0	Others	C9	C2	C4	C1
-1167.0	Anorexia nervosa	C6	C3	C3	C2
-1522.0	Others	C3	C2	C2	C6
-1080.0	Bulimia nervosa	C1	C3	C1	C1
-1498.0	Binge-ED	C3	C2	C5	C6
-1642.0	Bulimia nervosa	C2	C4	C1	C4
-1455.0	Others	C3	C2	C3	C2
-1452.0	Others	C1	C3	C1	C1
-1505.0	Bulimia nervosa	C5	C4	C4	C4
-1597.0	Anorexia nervosa	C3	C2	C5	C5
-1396.0	Other ED	C1	C1	C1	C1
-1261.0	Binge-ED	C2	C3	C1	C1
-1544.0	Binge-ED	C5	C4	C4	C4
-1312.0	Bulimia nervosa	C3	C2	C5	C5
-1465.0	Binge-ED	C3	C2	C5	C6
-1683.0	Others	C3	C2	C2	C2
-1689.0	Others	C4	C2	C2	C5
-1595.0	Anorexia nervosa	C9	C1	C1	C5
-1678.0	Anorexia nervosa	C6	C4	C4	C3
-1185.0	Others	C3	C1	C1	C1
-1435.0	Others	C2	C3	C1	C1
-1374.0	Others	C2	C3	C1	C1
-1495.0	Others	C6	C4	C3	C3
-1510.0	Others	C9	C2	C2	C5
-1692.0	Bulimia nervosa	C7	C2	C2	C6
-1485.0	Bulimia nervosa	C5	C4	C3	C4
-1614.0	Anorexia nervosa	C7	C2	C2	C5
-1487.0	Other ED	C1	C1	C1	C1
-1631.0	Binge-ED	C1	C4	C1	C4
-1443.0	Anorexia nervosa	C2	C4	C1	C4
-1615.0	Other ED	C5	C4	C4	C3
-1086.0	Other ED	C3	C3	C3	C2
-1287.0	Binge-ED	C4	C2	C2	C6
-1553.0	Bulimia nervosa	C8	C2	C1	C5
-1451.0	Bulimia nervosa	C5	C1	C4	C3
-1526.0	Bulimia nervosa	C9	C2	C2	C2
-1486.0	Binge-ED	C9	C1	C1	C4
-1432.0	Others	C1	C1	C1	C1
-1357.0	Other ED	C7	C2	C2	C5
-1558.0	Bulimia nervosa	C9	C2	C5	C5
-1448.0	Binge-ED	C6	C4	C4	C3
-1454.0	Bulimia nervosa	C9	C2	C5	C5
-1602.0	Bulimia nervosa	C5	C4	C4	C3
-1561.0	Binge-ED	C3	C2	C5	C5
-1663.0	Other ED	C1	C4	C1	C4
-1378.0	Bulimia nervosa	C4	C2	C2	C2
-1598.0	Bulimia nervosa	C6	C3	C2	C1
-1560.0	Anorexia nervosa	C9	C1	C4	C3
-1401.0	Binge-ED	C5	C4	C4	C3
-1252.0	Bulimia nervosa	C3	C2	C2	C2
-1466.0	Bulimia nervosa	C2	C4	C4	C4
-1588.0	Anorexia nervosa	C5	C4	C4	C3
-1423.0	Anorexia nervosa	C3	C2	C2	C6
-1469.0	Binge-ED	C9	C2	C1	C5
-1620.0	Other ED	C5	C4	C4	C3
-1143.0	Other ED	C2	C3	C1	C1
-1508.0	Binge-ED	C5	C1	C4	C3
-1511.0	Other ED	C1	C2	C1	C1
-1599.0	Bulimia nervosa	C4	C1	C1	C1
-1693.0	Others	C9	C2	C1	C3
-1265.0	Anorexia nervosa	C1	C1	C1	C1
-1350.0	Others	C8	C1	C1	C1
-1484.0	Anorexia nervosa	C6	C3	C3	C2
-1518.0	Anorexia nervosa	C7	C2	C2	C3
-1549.0	Anorexia nervosa	C8	C2	C1	C1
-1509.0	Other ED	C6	C2	C3	C2
-1601.0	Binge-ED	C3	C2	C5	C5
-1653.0	Anorexia nervosa	C7	C2	C3	C2
-1262.0	Other ED	C9	C2	C2	C5
-1348.0	Binge-ED	C5	C1	C4	C4
-1329.0	Anorexia nervosa	C8	C1	C1	C1
-1426.0	Others	C7	C1	C2	C2
-1520.0	Anorexia nervosa	C3	C2	C3	C6
-1540.0	Bulimia nervosa	C5	C2	C4	C3
-1701.0	Anorexia nervosa	C4	C2	C2	C6
-1566.0	Others	C3	C1	C1	C1
-1170.0	Others	C6	C4	C4	C3
-1720.0	Other ED	C2	C3	C4	C3
-1698.0	Anorexia nervosa	C3	C3	C1	C1
-1390.0	Others	C5	C4	C4	C3
-1104.0	Binge-ED	C2	C4	C4	C4
-1437.0	Other ED	C3	C4	C4	C3
-1478.0	Others	C6	C2	C3	C2
-1690.0	Anorexia nervosa	C2	C4	C4	C3
-1402.0	Anorexia nervosa	C2	C1	C1	C1
-1440.0	Anorexia nervosa	C1	C1	C3	C4
-1661.0	Anorexia nervosa	C4	C2	C2	C5
-1572.0	Other ED	C4	C2	C2	C6
-1712.0	Anorexia nervosa	C6	C3	C3	C2
-1173.0	Other ED	C1	C1	C1	C1
-1704.0	Others	C7	C2	C2	C1
-1482.0	Other ED	C9	C2	C4	C3
-1622.0	Anorexia nervosa	C2	C2	C5	C5
-1489.0	Others	C7	C2	C2	C6
-1648.0	Bulimia nervosa	C5	C4	C4	C3
-1208.0	Anorexia nervosa	C2	C1	C1	C1
-1542.0	Other ED	C2	C4	C1	C4
-1637.0	Others	C6	C3	C2	C2
-1417.0	Bulimia nervosa	C7	C2	C2	C5
-1306.0	Anorexia nervosa	C5	C4	C3	C3
-1657.0	Anorexia nervosa	C9	C2	C2	C5
-1002.0	Binge-ED	C1	C1	C1	C1
-1371.0	Anorexia nervosa	C3	C2	C2	C6
-1666.0	Anorexia nervosa	C2	C1	C1	C4
-1574.0	Others	C3	C2	C2	C6
-1582.0	Other ED	C4	C1	C1	C1
-1456.0	Others	C7	C4	C3	C1
-1475.0	Anorexia nervosa	C4	C2	C2	C6
-1695.0	Anorexia nervosa	C8	C2	C5	C5
-1441.0	Anorexia nervosa	C6	C3	C3	C2
-1682.0	Binge-ED	C4	C1	C1	C1
-1477.0	Other ED	C3	C2	C5	C5
-1670.0	Bulimia nervosa	C2	C4	C1	C4
-1537.0	Bulimia nervosa	C6	C3	C3	C2
-1381.0	Others	C7	C2	C3	C1
-1067.0	Binge-ED	C5	C4	C4	C4
-1528.0	Bulimia nervosa	C3	C2	C3	C6
-1557.0	Binge-ED	C1	C1	C1	C1
-1380.0	Anorexia nervosa	C3	C2	C2	C6
-1438.0	Binge-ED	C5	C4	C4	C3
-1501.0	Anorexia nervosa	C3	C2	C5	C5
-1596.0	Other ED	C5	C4	C3	C3
-1494.0	Binge-ED	C3	C2	C3	C3
-1370.0	Other ED	C4	C1	C1	C3
-1449.0	Binge-ED	C9	C1	C1	C5
-1411.0	Anorexia nervosa	C8	C2	C1	C1
-1430.0	Anorexia nervosa	C4	C2	C2	C6
-1376.0	Anorexia nervosa	C2	C1	C1	C1
-1364.0	Anorexia nervosa	C4	C2	C2	C6
-1533.0	Anorexia nervosa	C6	C3	C3	C2
-1651.0	Binge-ED	C4	C2	C2	C3
-1644.0	Anorexia nervosa	C6	C2	C3	C6
-1665.0	Bulimia nervosa	C2	C1	C1	C1
-1294.0	Others	C3	C2	C5	C6
-1645.0	Other ED	C3	C2	C2	C6
-1605.0	Other ED	C2	C1	C1	C1
-1327.0	Other ED	C5	C4	C4	C3
-1568.0	Anorexia nervosa	C9	C1	C1	C1
-1245.0	Anorexia nervosa	C2	C4	C4	C4
-1114.0	Other ED	C8	C1	C1	C1
-1407.0	Anorexia nervosa	C6	C3	C2	C2
-1616.0	Bulimia nervosa	C8	C2	C2	C5
-1450.0	Other ED	C2	C1	C4	C3
-1296.0	Binge-ED	C5	C4	C4	C3
-1178.0	Binge-ED	C2	C1	C1	C1
-1473.0	Others	C7	C2	C2	C5
-1183.0	Anorexia nervosa	C2	C3	C3	C4
-1672.0	Anorexia nervosa	C1	C1	C1	C1
-1338.0	Other ED	C7	C2	C2	C5
-1722.0	Others	C6	C2	C3	C6
-1679.0	Bulimia nervosa	C5	C4	C4	C3
-1527.0	Anorexia nervosa	C4	C2	C2	C6
-1617.0	Anorexia nervosa	C3	C1	C1	C1
-1317.0	Others	C2	C3	C1	C1
-1567.0	Other ED	C2	C1	C1	C1
-1172.0	Anorexia nervosa	C4	C1	C1	C1
-1433.0	Others	C3	C2	C3	C2
-1696.0	Bulimia nervosa	C5	C1	C4	C4
-1699.0	Other ED	C4	C3	C3	C2
-1571.0	Anorexia nervosa	C1	C1	C1	C1
-1688.0	Other ED	C6	C4	C3	C3
-1382.0	Other ED	C2	C1	C1	C1
-164.0	Anorexia nervosa	C8	C1	C3	C1
-1427.0	Bulimia nervosa	C2	C1	C1	C1
-1671.0	Other ED	C6	C3	C4	C3
-1604.0	Anorexia nervosa	C4	C1	C1	C1
-1458.0	Other ED	C8	C1	C1	C1
-1413.0	Others	C7	C2	C2	C2
-1429.0	Anorexia nervosa	C6	C2	C3	C2
-1389.0	Anorexia nervosa	C9	C2	C2	C5
-1307.0	Anorexia nervosa	C4	C2	C3	C1
+intid	EDtype	PCA_Agg_Clustering	FA_GMM_Clustering	PCA_GMM_Clustering
+1491.0	Binge-ED	C1	C4	C2
+1481.0	Anorexia nervosa	C2	C3	C1
+1613.0	Bulimia nervosa	C2	C2	C1
+1387.0	Other ED	C1	C3	C3
+1603.0	Other ED	C2	C2	C4
+1476.0	Anorexia nervosa	C4	C3	C2
+1377.0	Anorexia nervosa	C2	C5	C1
+1551.0	Bulimia nervosa	C2	C2	C4
+1424.0	Binge-ED	C1	C1	C7
+1320.0	Anorexia nervosa	C1	C1	C7
+1446.0	Binge-ED	C2	C1	C3
+1315.0	Anorexia nervosa	C2	C2	C5
+1474.0	Other ED	C2	C1	C3
+1658.0	Others	C2	C1	C1
+1425.0	Others	C2	C2	C1
+1414.0	Other ED	C2	C4	C2
+1132.0	Others	C4	C4	C2
+1460.0	Binge-ED	C1	C1	C7
+1612.0	Binge-ED	C4	C1	C6
+1463.0	Others	C2	C2	C1
+1584.0	Anorexia nervosa	C2	C2	C4
+1669.0	Anorexia nervosa	C1	C1	C6
+1244.0	Others	C1	C1	C3
+1626.0	Others	C1	C1	C7
+1677.0	Anorexia nervosa	C4	C1	C6
+1391.0	Anorexia nervosa	C1	C1	C3
+1536.0	Others	C1	C1	C6
+1525.0	Others	C3	C1	C3
+1556.0	Anorexia nervosa	C2	C3	C5
+1293.0	Binge-ED	C1	C1	C7
+1403.0	Binge-ED	C4	C3	C2
+1547.0	Others	C1	C1	C6
+1583.0	Anorexia nervosa	C2	C2	C4
+1434.0	Binge-ED	C2	C5	C4
+1685.0	Anorexia nervosa	C1	C1	C6
+1412.0	Other ED	C2	C2	C4
+1467.0	Bulimia nervosa	C4	C3	C6
+1559.0	Anorexia nervosa	C2	C5	C4
+1676.0	Anorexia nervosa	C1	C1	C7
+1577.0	Binge-ED	C4	C4	C2
+1686.0	Anorexia nervosa	C3	C1	C3
+1459.0	Others	C2	C2	C1
+1415.0	Others	C2	C2	C1
+1647.0	Anorexia nervosa	C2	C2	C5
+1521.0	Anorexia nervosa	C2	C2	C1
+1586.0	Other ED	C4	C3	C2
+1532.0	Other ED	C1	C5	C4
+1339.0	Anorexia nervosa	C2	C2	C4
+1610.0	Anorexia nervosa	C4	C1	C3
+1530.0	Binge-ED	C2	C4	C4
+1232.0	Anorexia nervosa	C2	C2	C4
+1707.0	Others	C2	C2	C1
+1649.0	Bulimia nervosa	C3	C1	C3
+1643.0	Bulimia nervosa	C2	C2	C1
+1659.0	Anorexia nervosa	C2	C3	C1
+1347.0	Other ED	C1	C1	C3
+1581.0	Bulimia nervosa	C4	C4	C2
+1575.0	Bulimia nervosa	C4	C3	C6
+1479.0	Other ED	C4	C1	C6
+1555.0	Binge-ED	C2	C4	C4
+1461.0	Others	C2	C4	C3
+1167.0	Anorexia nervosa	C3	C3	C3
+1522.0	Others	C2	C2	C1
+1080.0	Bulimia nervosa	C3	C1	C3
+1498.0	Binge-ED	C2	C5	C1
+1642.0	Bulimia nervosa	C4	C1	C6
+1455.0	Others	C2	C3	C5
+1452.0	Others	C3	C1	C3
+1505.0	Bulimia nervosa	C4	C4	C6
+1597.0	Anorexia nervosa	C2	C5	C4
+1396.0	Other ED	C1	C1	C7
+1261.0	Binge-ED	C3	C1	C3
+1544.0	Binge-ED	C4	C4	C6
+1312.0	Bulimia nervosa	C2	C5	C4
+1465.0	Binge-ED	C2	C5	C1
+1683.0	Others	C2	C2	C5
+1689.0	Others	C2	C2	C4
+1595.0	Anorexia nervosa	C1	C1	C4
+1678.0	Anorexia nervosa	C4	C4	C2
+1185.0	Others	C1	C1	C7
+1435.0	Others	C3	C1	C3
+1374.0	Others	C3	C1	C3
+1495.0	Others	C4	C3	C2
+1510.0	Others	C2	C2	C4
+1692.0	Bulimia nervosa	C2	C2	C1
+1485.0	Bulimia nervosa	C4	C3	C6
+1614.0	Anorexia nervosa	C2	C2	C4
+1487.0	Other ED	C1	C1	C7
+1631.0	Binge-ED	C4	C1	C6
+1443.0	Anorexia nervosa	C4	C1	C6
+1615.0	Other ED	C4	C4	C2
+1086.0	Other ED	C3	C3	C3
+1287.0	Binge-ED	C2	C2	C1
+1553.0	Bulimia nervosa	C2	C1	C4
+1451.0	Bulimia nervosa	C1	C4	C2
+1526.0	Bulimia nervosa	C2	C2	C3
+1486.0	Binge-ED	C1	C1	C7
+1432.0	Others	C1	C1	C3
+1357.0	Other ED	C2	C2	C4
+1558.0	Bulimia nervosa	C2	C5	C4
+1448.0	Binge-ED	C4	C4	C2
+1454.0	Bulimia nervosa	C2	C5	C4
+1602.0	Bulimia nervosa	C4	C4	C2
+1561.0	Binge-ED	C2	C5	C4
+1663.0	Other ED	C4	C1	C6
+1378.0	Bulimia nervosa	C2	C2	C5
+1598.0	Bulimia nervosa	C3	C2	C3
+1560.0	Anorexia nervosa	C1	C4	C2
+1401.0	Binge-ED	C4	C4	C2
+1252.0	Bulimia nervosa	C2	C2	C5
+1466.0	Bulimia nervosa	C4	C4	C6
+1588.0	Anorexia nervosa	C4	C4	C2
+1423.0	Anorexia nervosa	C2	C2	C1
+1469.0	Binge-ED	C2	C1	C4
+1620.0	Other ED	C4	C4	C2
+1143.0	Other ED	C3	C1	C3
+1508.0	Binge-ED	C1	C4	C2
+1511.0	Other ED	C2	C1	C3
+1599.0	Bulimia nervosa	C1	C1	C3
+1693.0	Others	C2	C1	C2
+1265.0	Anorexia nervosa	C1	C1	C7
+1350.0	Others	C1	C1	C7
+1484.0	Anorexia nervosa	C3	C3	C5
+1518.0	Anorexia nervosa	C2	C2	C3
+1549.0	Anorexia nervosa	C2	C1	C7
+1509.0	Other ED	C2	C3	C5
+1601.0	Binge-ED	C2	C5	C4
+1653.0	Anorexia nervosa	C2	C3	C5
+1262.0	Other ED	C2	C2	C4
+1348.0	Binge-ED	C1	C4	C6
+1329.0	Anorexia nervosa	C1	C1	C7
+1426.0	Others	C1	C2	C3
+1520.0	Anorexia nervosa	C2	C3	C1
+1540.0	Bulimia nervosa	C2	C4	C2
+1701.0	Anorexia nervosa	C2	C2	C1
+1566.0	Others	C1	C1	C7
+1170.0	Others	C4	C4	C2
+1720.0	Other ED	C3	C4	C2
+1698.0	Anorexia nervosa	C3	C1	C3
+1390.0	Others	C4	C4	C2
+1104.0	Binge-ED	C4	C4	C6
+1437.0	Other ED	C4	C4	C2
+1478.0	Others	C2	C3	C5
+1690.0	Anorexia nervosa	C4	C4	C2
+1402.0	Anorexia nervosa	C1	C1	C3
+1440.0	Anorexia nervosa	C1	C3	C6
+1661.0	Anorexia nervosa	C2	C2	C4
+1572.0	Other ED	C2	C2	C1
+1712.0	Anorexia nervosa	C3	C3	C5
+1173.0	Other ED	C1	C1	C7
+1704.0	Others	C2	C2	C3
+1482.0	Other ED	C2	C4	C2
+1622.0	Anorexia nervosa	C2	C5	C4
+1489.0	Others	C2	C2	C1
+1648.0	Bulimia nervosa	C4	C4	C2
+1208.0	Anorexia nervosa	C1	C1	C3
+1542.0	Other ED	C4	C1	C6
+1637.0	Others	C3	C2	C5
+1417.0	Bulimia nervosa	C2	C2	C4
+1306.0	Anorexia nervosa	C4	C3	C2
+1657.0	Anorexia nervosa	C2	C2	C4
+1002.0	Binge-ED	C1	C1	C7
+1371.0	Anorexia nervosa	C2	C2	C1
+1666.0	Anorexia nervosa	C1	C1	C6
+1574.0	Others	C2	C2	C1
+1582.0	Other ED	C1	C1	C7
+1456.0	Others	C4	C3	C3
+1475.0	Anorexia nervosa	C2	C2	C1
+1695.0	Anorexia nervosa	C2	C5	C4
+1441.0	Anorexia nervosa	C3	C3	C5
+1682.0	Binge-ED	C1	C1	C3
+1477.0	Other ED	C2	C5	C4
+1670.0	Bulimia nervosa	C4	C1	C6
+1537.0	Bulimia nervosa	C3	C3	C5
+1381.0	Others	C2	C3	C3
+1067.0	Binge-ED	C4	C4	C6
+1528.0	Bulimia nervosa	C2	C3	C1
+1557.0	Binge-ED	C1	C1	C7
+1380.0	Anorexia nervosa	C2	C2	C1
+1438.0	Binge-ED	C4	C4	C2
+1501.0	Anorexia nervosa	C2	C5	C4
+1596.0	Other ED	C4	C3	C2
+1494.0	Binge-ED	C2	C3	C2
+1370.0	Other ED	C1	C1	C2
+1449.0	Binge-ED	C1	C1	C4
+1411.0	Anorexia nervosa	C2	C1	C3
+1430.0	Anorexia nervosa	C2	C2	C1
+1376.0	Anorexia nervosa	C1	C1	C7
+1364.0	Anorexia nervosa	C2	C2	C1
+1533.0	Anorexia nervosa	C3	C3	C5
+1651.0	Binge-ED	C2	C2	C2
+1644.0	Anorexia nervosa	C2	C3	C1
+1665.0	Bulimia nervosa	C1	C1	C3
+1294.0	Others	C2	C5	C1
+1645.0	Other ED	C2	C2	C1
+1605.0	Other ED	C1	C1	C7
+1327.0	Other ED	C4	C4	C2
+1568.0	Anorexia nervosa	C1	C1	C7
+1245.0	Anorexia nervosa	C4	C4	C6
+1114.0	Other ED	C1	C1	C7
+1407.0	Anorexia nervosa	C3	C2	C5
+1616.0	Bulimia nervosa	C2	C2	C4
+1450.0	Other ED	C1	C4	C2
+1296.0	Binge-ED	C4	C4	C2
+1178.0	Binge-ED	C1	C1	C7
+1473.0	Others	C2	C2	C4
+1183.0	Anorexia nervosa	C3	C3	C6
+1672.0	Anorexia nervosa	C1	C1	C7
+1338.0	Other ED	C2	C2	C4
+1722.0	Others	C2	C3	C1
+1679.0	Bulimia nervosa	C4	C4	C2
+1527.0	Anorexia nervosa	C2	C2	C1
+1617.0	Anorexia nervosa	C1	C1	C7
+1317.0	Others	C3	C1	C3
+1567.0	Other ED	C1	C1	C7
+1172.0	Anorexia nervosa	C1	C1	C3
+1433.0	Others	C2	C3	C5
+1696.0	Bulimia nervosa	C1	C4	C6
+1699.0	Other ED	C3	C3	C5
+1571.0	Anorexia nervosa	C1	C1	C7
+1688.0	Other ED	C4	C3	C2
+1382.0	Other ED	C1	C1	C3
+164.0	Anorexia nervosa	C1	C3	C7
+1427.0	Bulimia nervosa	C1	C1	C7
+1671.0	Other ED	C3	C4	C2
+1604.0	Anorexia nervosa	C1	C1	C3
+1458.0	Other ED	C1	C1	C3
+1413.0	Others	C2	C2	C5
+1429.0	Anorexia nervosa	C2	C3	C5
+1389.0	Anorexia nervosa	C2	C2	C4
+1307.0	Anorexia nervosa	C2	C3	C1
