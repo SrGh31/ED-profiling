@@ -50,7 +50,12 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
     ed_cluster_df.rename(columns={'EDtype':'Cluster'}, inplace=True)
     ed_cluster_df.plot.bar(ax=ax[1])
     ax[1].set_xlabel('Clusters', fontsize=fs)
-    ax[1].legend(fontsize=fs-2)	
+    ax[1].set_ylabel('Normalized feature values', fontsize=fs)
+    labels = [item.get_text() for item in ax[1].get_xticklabels()]
+    for idx,label in enumerate(labels):
+        labels[idx]='C%d'%(idx+1)
+    ax[1].set_xticklabels(labels, fontsize=fs-1)
+    ax[1].legend(fontsize=fs-3)	
     plt.savefig('figs/PDFs/ED_%s_%s.pdf'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
     plt.savefig('figs/PNGs/ED_%s_%s.png'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
     zs_ed_cluster_df=pd.DataFrame.from_dict(zs_cluster_median_profile).T
