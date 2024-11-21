@@ -22,10 +22,10 @@ def Normalizer(X_0):
         X=sc.transform(X_0)
     return X
 
-def GridSearch_RF(X, Y, scorer):
+def GridSearch_RF(X, Y, scorer, param_grid):
     pipe_RF_search = Pipeline(steps=[('RandomForestRegressor', RandomForestRegressor())])
-    rf_param_grid = { "RandomForestRegressor__n_estimators": [100, 250, 300, 500],           
-           "RandomForestRegressor__max_features": [5,7,11,15],
+    rf_param_grid = { "RandomForestRegressor__n_estimators": param_grid['RF_n_Trees'],           
+           "RandomForestRegressor__max_features": param_grid['RF_Max_Features'],
                     "RandomForestRegressor__criterion":['squared_error', 'absolute_error', 'friedman_mse', 'poisson']}
     rf_grid_search = GridSearchCV(pipe_RF_search, rf_param_grid,cv=5, scoring=scorer)
     rf_grid_search.fit(X, Y)
@@ -79,13 +79,18 @@ def GridSearch_SVM(X,Y, scorer):
     return df_linSVM_gs, df_rbfSVM_gs
 
 
-def GridSearchRegressors(X_0, Y):    
-    X=Normalizer(X_0)
-    scorer='neg_root_mean_squared_log_error'
-    df_knn_gs=GridSearch_KNN(X,Y, scorer)
+def GridSearchRegressors(X_0, Y, param_grid):    
+    if X_0.mean().abs().mean()>0.01:
+        zX=Normalizer(X_0)
+    else:
+        zX=X_0
+    scorer=param_grid['scorer']
+    #scorer='neg_root_mean_squared_log_error'
+    df_knn_gs=GridSearch_KNN(zX,Y, scorer)
     print('KNN: \n', df_knn_gs.head(4))
-    df_rf_gs=GridSearch_RF(X,Y, scorer)
+    rf_param_grid=param_grid['RF']
+    df_rf_gs=GridSearch_RF(zX,Y,scorer, rf_param_grid)
     print('RF: \n', df_rf_gs.head(4))   
-    df_linSVM_gs, df_rbfSVM_gs= GridSearch_SVM(X,Y, scorer)
+    df_linSVM_gs, df_rbfSVM_gs= GridSearch_SVM(zX,Y, scorer)
     print('Linear SVM: \n', df_linSVM_gs.head(4))
     print('RBF SVM: \n', df_rbfSVM_gs.head(4))
