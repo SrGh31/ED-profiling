@@ -23,7 +23,7 @@ def Normalizer(X_0):
     return X
 
 def GridSearch_RF(X, Y, scorer, param_grid):
-    pipe_RF_search = Pipeline(steps=[('RandomForestRegressor', RandomForestRegressor())])
+    pipe_RF_search = Pipeline(steps=[('RandomForestRegressor',RandomForestRegressor(min_samples_leaf=param_grid['RF_min_leaf'] ))])
     rf_param_grid = { "RandomForestRegressor__n_estimators": param_grid['RF_n_Trees'],           
            "RandomForestRegressor__max_features": param_grid['RF_Max_Features'],
                     "RandomForestRegressor__criterion":['squared_error', 'absolute_error', 'friedman_mse', 'poisson']}

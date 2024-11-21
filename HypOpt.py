@@ -46,7 +46,8 @@ def ClassBalancing(X_1, Y_1, strategy):
 def GridSearch_RF(X, Y,repeated_kfolds, param_grid):
     #maa=param_grid['scorer'] 
     #sm = SMOTENC(random_state=42, sampling_strategy='not majority', categorical_features='infer')
-    pipe_RF_search = Pipeline(steps=[('RandomForestClassifier', RandomForestClassifier(criterion="gini"))])
+    pipe_RF_search = Pipeline(steps=[('RandomForestClassifier', RandomForestClassifier(criterion="gini",
+                            class_weight='balanced_subsample', min_samples_leaf=param_grid['RF_min_leaf']))])
     rf_param_grid = { "RandomForestClassifier__n_estimators":param_grid['RF_n_Trees'], #[100, 250, 300, 500],           
            "RandomForestClassifier__max_features" : param_grid['RF_Max_Features']}
     rf_grid_search = GridSearchCV(pipe_RF_search, rf_param_grid,cv=repeated_kfolds, scoring=param_grid['scorer'])
@@ -73,9 +74,11 @@ def GridSearch_KNN(X,Y,repeated_kfolds, param_grid):
     return df_knn_gs
 
 def GridSearch_LDA(X,Y,repeated_kfolds, param_grid):
-   # maa=make_scorer(maa_score)
+   # maa=make_scorer(maa_score)solver='eigen', shrinkage='auto'
     pipe_LDA_search = Pipeline(steps=[('LinearDiscriminantAnalysis', LinearDiscriminantAnalysis())])
-    lda_param_grid = {"LinearDiscriminantAnalysis__solver": ['svd', 'lsqr', 'eigen']}
+    lda_param_grid = [{"LinearDiscriminantAnalysis__solver": ['svd', 'lsqr']},
+                     {"LinearDiscriminantAnalysis__shrinkage": ['auto', 'None'],
+                       "LinearDiscriminantAnalysis__solver": ['eigen']}]
     lda_grid_search = GridSearchCV(pipe_LDA_search, lda_param_grid,cv=repeated_kfolds, scoring=param_grid['scorer']) 
     lda_grid_search.fit(X, Y)
     df_lda_gs = pd.DataFrame(lda_grid_search.cv_results_)[
@@ -87,8 +90,8 @@ def GridSearch_LDA(X,Y,repeated_kfolds, param_grid):
 
 def GridSearch_SVM(X,Y,repeated_kfolds, param_grid):
     #maa=make_scorer(maa_score)
-    svc_linear=SVC(kernel="linear", random_state=42)
-    svc_rbf=SVC(kernel='rbf', random_state=42)    
+    svc_linear=SVC(kernel="linear")
+    svc_rbf=SVC(kernel='rbf')    
     lin_param_grid = {'svc_linear__C': [0.001, 0.01, 0.1, 1, 10, 100]}
     pipe_lSVM_search = Pipeline([('svc_linear', svc_linear)])
     linSVM_grid_search = GridSearchCV(pipe_lSVM_search, lin_param_grid, cv=repeated_kfolds, scoring=param_grid['scorer'])
