@@ -1,0 +1,250 @@
+Questions:
+Q1. What is Others vs Other ED? Can we just separate Others from training and just see where the classifier models place them? (When we get to the classification experiments)Q2. 
+Q2. Why are there 115 patients in dectools who are not available in df_main file? I puthere the client number and their aanmeldnummer (not masked ids) here:
+    1107189   10509876   68682781   89937051  148460136  153286708
+  156011005  198753295  202454804  203879411  245665408  268279907
+  275459640  332301207  340294940  341113615  359863266  407779430
+  441287910  496458640  503117025  516912147  525540181  540841766
+  613160318  618301381  619621218  626139284  638174766  680889261
+  691687068  703565890  825014328  847758353  859751306  896228904
+  898988790  903701899  931775643  965066175  979661959 1003157607
+ 1059886887 1101088567 1109250068 1125220842 1127157781 1129305054
+ 1157609809 1163031786 1166182171 1178625401 1197785440 1212700914
+ 1221023961 1282824457 1329907984 1330016549 1367470744 1382868492
+ 1389255236 1395381952 1441151522 1453997467 1476770117 1494972968
+ 1504744258 1505447479 1510950191 1592333220 1604788302 1642026736
+ 1661531008 1662701113 1669999777 1678402123 1686481339 1691769936
+ 1699533193 1703715502 1708592711 1715984761 1717333858 1722435595
+ 1731893873 1737631199 1743755217 1768184347 1775584669 1775924321
+ 1802292300 1811175260 1814941081 1817911560 1829677354 1830522041
+ 1837319035 1848507086 1857782760 1918733555 1921453989 1922805428
+ 1935615603 1957983141 1968533443 1970153704 2002436389 2004477534
+ 2057424924 2058120057 2067933443 2082363157 2093851415 2098899212
+ 2134343218
+
+Q3. Why are there the following client ids (not masked) who have no intake ids? I found these from the dectools file (425605249  525540181  965066175 1178625401 1737631199). 
+          cid   dectool_invultijd
+     425605249  2023-04-13 00:00:00
+     525540181  2023-12-13 00:00:00
+     965066175  2023-05-02 00:00:00
+    1178625401  2021-09-14 15:08:31
+    1737631199  2021-09-14 15:16:06
+
+Q4. There are about 1278 patients present in main file who are not in the dectools file. What could be the reason for this?
+
+Q5. If dectools are only supposed to be for intake then why are there a few repeats for dectools? Please see the table Dectool_Main _Discrepancy.tsv in the main daisy folder. I have jotted  down my queries per patient and intake id.
+
+
+Other findings:
+F1. All patients in EDEQ_ALL (which combined datasets EDEQ scores of adults and EDEQ of kids) are present in df_main. 
+However there are 114 patients in main who are not present in EDEQ_All.
+Hence let's proceed with only those patients who are there in main, EDEQ_All (as this is going to be our label), and in dectools. 
+
+- Only pids 461 and 530 have two intakes. 
+
+
+File contents:
+1. maskedDAIsy_MainDectoolEDEQ_Visit1_Only: Combination of main, Dectools,and values from visit-1 from (i) EDEQ (adults and kids combined)
+2. maskedDAIsy_MainDectoolEDEQ_Visit2_Only: Combination of main, Dectools,and values from visit-2 from (i) EDEQ (adults and kids combined)
+Similarly for Visit3_Only
+3. maskedDAIsy_MainDec_ED_SQ48_Visit1: Combination of main, Dectools,and values from visit-1 from (i) EDEQ (adults and kids combined), (ii) SQ48
+4. maskedDAIsy_MainDec_ED_MHCSF_Visit1: Combination of main, Dectools,and values from visit-1 from (i) EDEQ (adults and kids combined), (ii) MHCSF
+5. maskedDAIsy_MainDec_ED_SQ48_MHCSF_Visit1: Combination of main, Dectools,and values from visit-1 from (i) EDEQ (adults and kids combined), (ii) SQ48, and (iii) MHCSF
+
+
+Main all : No. of intake ids=1724, patients=1607, shape=1724
+Main wo repeats : No. of intake ids=1485, patients=1485, shape=1485
+Dectools: No. of intake ids=321, patients=329, shape=332
+Lav: No. of intake ids=312, patients=312, shape=312
+Lav wo repeats : No. of intake ids=312, patients=312, shape=312
+Honos: No. of intake ids=220, patients=220, shape=220
+Honos wo repeats : No. of intake ids=220, patients=220, shape=220
+SQ48: No. of intake ids=657, patients=657, shape=657
+SQ48 wo repeats : No. of intake ids=657, patients=657, shape=657
+MHC-SF: No. of intake ids=553, patients=553, shape=553
+MHC-SF wo repeats : No. of intake ids=553, patients=553, shape=553
+Dectools: No. of intake ids=321, patients=329, shape=332
+Dectools wo repeats : No. of intake ids=288, patients=288, shape=288
+Num patients and intakes in edqol is:  14 14
+Num of unique patients and intakes in rei= 13 13
+
+Vitals -(Visit-1)
+Tensie / Pols 76 76
+Body Mass Index 243 243
+Temperatuur (c) 76 76
+Vochtbalans (ml) 5 5
+Bloedsuiker (mmol/L) 34 34
+Saturatie (%) 74 74
+Bloeddruk (mmHg) 55 55
+Pols 57 57
+Defaecatie 63 63
+Vetmassa (kg) 64 64
+VetPercentage (%) 64 64
+Vetvrije Massa (kg) 64 64
+Spiermassa (kg) 64 64
+Ruststofwisseling BMR (kcal) 63 63
+Vochtpercentage (%) 61 61
+Retentie 1 1
+Menstruatiecyclus (dagen) 1 1
+(601, 10) 5 5
+
+
+
+Lab-Visit-1
+Hemoglobine (mmol/l): 70 (70)
+Kalium (mmol/l): 70 (70)
+Chloride (mmol/l): 69 (69)
+Bicarbonaat (mmol/l): 69 (69)
+Calcium (mmol/l): 70 (70)
+Fosfaat anorganisch (mmol/l): 69 (69)
+Leucocyten (10^9/l): 70 (70)
+Kreatinine (umol/l): 70 (70)
+eGFR/1.73m2 (ml/min): 69 (69)
+Nuchtere patient: 44 (44)
+ASAT (GOT) (U/l): 70 (70)
+ALAT (GPT) (U/l): 70 (70)
+gamma-GT (U/l): 70 (70)
+CK (CPK) (U/L): 50 (50)
+Albumine (g/l): 69 (69)
+CRP (C-reactief proteine) (mg/l): 69 (69)
+Glucose(nuchter) (mmol/l): 43 (43)
+Magnesium (mmol/l): 69 (69)
+no Show: 34 (34)
+Glucose (n.n.) (mmol/l): 54 (54)
+Bezinking na 1 uur (mm/h): 29 (29)
+MCV (fl): 30 (30)
+Trombocyten (10^9/l): 39 (39)
+Ureum (mmol/l): 28 (28)
+Neutrofielen (10^9/l): 39 (39)
+Lymfocyten (10^9/l): 39 (39)
+Monocyten (10^9/l): 39 (39)
+Eosinofielen (10^9/l): 39 (39)
+Basofielen (10^9/l): 39 (39)
+Bilirubine totaal (umol/l): 32 (32)
+Alkalische fosfatase (U/l): 31 (31)
+Eiwit totaal (g/l): 28 (28)
+Protrombinetijd INR: 34 (34)
+Protrombinetijd    (PT) (sec): 33 (33)
+Ferritine (ug/l): 28 (28)
+Vitamine B12 (pmol/l): 29 (29)
+Foliumzuur (nmol/l): 29 (29)
+TSH (mE/l): 30 (30)
+T4 Vrij (pmol/l): 5 (5)
+Vitamine B1 (nmol/l): 28 (28)
+Vitamine D totaal (nmol/l): 30 (30)
+Calcium, gecorrigeerd (mmol/l): 14 (14)
+Afname Bloed: 4 (4)
+Antibiotica ingenomen:: 2 (2)
+Katheter: 2 (2)
+Plaveiselepitheel (/ul): 1 (1)
+Leucocyten (/ul): 2 (2)
+Urine kweek: 2 (2)
+Tromboplastinetijd (APTT) (sec.): 14 (14)
+Hematocriet (l/l): 9 (9)
+Erytrocyten (10^12/l): 7 (7)
+MCHC (mmol/l): 7 (7)
+RDW (%): 7 (7)
+Cholesterol (mmol/l): 5 (5)
+Triglyceriden (mmol/l): 5 (5)
+HDL-cholesterol (mmol/l): 5 (5)
+LDL-cholesterol Direct (mmol/l): 5 (5)
+Ratio cholesterol/HDL (mol/mol): 5 (5)
+Non-HDL_cholesterol (mmol/l): 6 (6)
+Bilirubine esters (umol/l): 4 (4)
+Tranylcypromine (ug/l): 0 (0)
+Afname tijd (uur): 3 (3)
+Dosering (mg/dag): 5 (5)
+Tijd laatste inname (uur): 3 (3)
+HbA1c(GlycoHb)IFCC (mmol/mol): 2 (2)
+Opmerking anemieprotocol:: 4 (4)
+Cytochroom P450 (DNA) polymorf: 1 (1)
+Venlafaxine (ug/l): 2 (2)
+Desmethylvenlafaxine (ug/l): 2 (2)
+Som Venlafaxine + Desm. (ug/l): 2 (2)
+Occult bloed (iFOBT) (ng/ml): 2 (2)
+Soortelijk gewicht (g/ml): 1 (1)
+Waarschijnlijkheidsdiag.: 3 (3)
+pH: 1 (1)
+Glucose: 70 (70)
+Eiwit: 29 (29)
+Ketonen: 1 (1)
+Occult bloed: 2 (2)
+Bilirubine: 33 (33)
+Leucocyten: 70 (70)
+Nitriet: 1 (1)
+Erythrocyten (/g.veld): 1 (1)
+Leucocyten (/g.veld): 1 (1)
+Bacterie: 1 (1)
+Opmerking sediment: 1 (1)
+Calprotecin 2 (faeces) (mg/kg): 2 (2)
+Helicobacter: 2 (2)
+Kreatinine (ur.) (mmol/l): 2 (2)
+Albumine (ur.) (mg/l): 2 (2)
+Ratio Albumine/Kreatinine (mg/mmol): 2 (2)
+NT-proBNP (pmol/l): 2 (2)
+Analyse van:: 2 (2)
+Uitslag:: 2 (2)
+Clomipramine (Anafranil) (ug/l): 0 (0)
+N-desmethylclomipramine (ug/l): 0 (0)
+Som Clomipramine + Desm. (ug/l): 0 (0)
+Tijd laatste inname: 5 (5)
+Afname tijd: 5 (5)
+LD (LDH) (U/l): 0 (0)
+Vitamine B6 (nmol/l): 1 (1)
+Fluvoxamine (ug/l): 2 (2)
+Sertraline (ug/l): 1 (1)
+Desmethylsertraline (ug/l): 1 (1)
+Lipase (U/l): 2 (2)
+Nortriptyline (ug/l): 1 (1)
+E 10-OH Nortriptyline (ug/l): 1 (1)
+Z 10-OH Nortriptyline (ug/l): 1 (1)
+Luteiniserend hormoon (LH) (E/l): 1 (1)
+FSH (E/l): 1 (1)
+Oestradiol (pmol/l): 1 (1)
+Hepatitis E IgG: 1 (1)
+Hepatitis E IgM: 1 (1)
+Immunoglobuline A (g/l): 1 (1)
+Anti-Transglutaminase IgA (U/ml): 1 (1)
+Eerdere infectie Hepatitits E: 1 (1)
+Imipramine (ug/l): 0 (0)
+Som Imi- + Desipramine (ug/l): 0 (0)
+Desipramine (ug/l): 0 (0)
+Amitriptyline (ug/l): 0 (0)
+Som Ami- + Nortriptyline (ug/l): 0 (0)
+Prolactine (mE/l): 1 (1)
+Toxoplasma IgG As.: 1 (1)
+Toxoplasma IgM As.: 1 (1)
+EBV VCA-IgM As.: 1 (1)
+EBV EBNA-IgG As.: 1 (1)
+EBV VCA-IgG As.: 1 (1)
+Waarschijnlijkheidsdiag.:: 1 (1)
+Lithium (mmol/l): 0 (0)
+Reticulocyten (10^9/l): 1 (1)
+Ijzer (umol/l): 0 (0)
+Transferrine (g/l): 0 (0)
+Transferrine saturatie (%): 0 (0)
+Cytomegalovirus IgM As.: 0 (0)
+Cytomegalovirus IgG As.: 0 (0)
+Hepatitis A Totaal As: 0 (0)
+Hepatitis A IgM As: 0 (0)
+Hepatitis B surf Ag(HBsAg): 0 (0)
+Hep.B surf As  (anti-HBs) (IU/l): 0 (0)
+Hep.B core AsTot(anti-HBc): 0 (0)
+Hepatitis C As: 0 (0)
+Osmolaliteit in urine (mOsm/kg): 1 (1)
+Cortisol (nmol/l): 1 (1)
+Tijd: 6 (6
+
+Filenames: 
+'maskedDAIsy_DECTOOLS.tsv',
+ 'maskedDAIsy_EDEQ_Score.tsv',
+ 'maskedDAIsy_Honos.tsv',
+ 'maskedDAIsy_LAV.tsv',
+ 'maskedDAIsy_MainDectoolEDEQ_Visit1_Only.tsv',
+ 'maskedDAIsy_MainDect_ED_SQ48_MHC_Honos_Lav.tsv',
+ 'maskedDAIsy_MainED_Lav_SQ48_MHCSF_Visit1.tsv',
+ 'maskedDAIsy_MainED_Lav_SQ48_MHCSF_Visit2.tsv',
+ 'maskedDAIsy_MainED_Lav_SQ48_MHCSF_Visit3.tsv',
+ 'maskedDAIsy_MHCSF_all.tsv',
+ 'maskedDAIsy_SQ48_all.tsv'
+
