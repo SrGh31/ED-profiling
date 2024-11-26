@@ -39,7 +39,7 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
 		                            df['SQ48-Score'].iloc[class_members].mean()))
         else:
             ax[0].scatter(cluster_center[0], cluster_center[1], s=12, color=col["color"], marker="o", alpha=0.75,
-	            label='C%d (%d), ES:%.2f'%(k+1, np.sum(class_members),df['EDEQ-Score'].iloc[class_members].mean()))
+	            label='C%d (N=%d)'%(k+1, np.sum(class_members)))
         for x in data_to_plot[class_members]:
 	        ax[0].plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], color=col["color"], alpha=0.5)
     ax[0].set_xlabel(fig_lab_titles['ax0_xlab'], fontsize=fs)
