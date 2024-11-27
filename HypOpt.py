@@ -118,24 +118,47 @@ def GridSearch_LVQ(X_0,Y_0, sampling_strategy, param_grid):
     else:
         param_grid['scorer']=make_scorer(lowest_cwacc)
     solvers_types = [ "sgd", "wgd", "lbfgs","adam"] 
-    gmlvq=GMLVQ(distance_type="adaptive-squared-euclidean")
     zX=Normalizer(X_0)
     X,Y=ClassBalancing(zX,Y_0, sampling_strategy)
-    pipeline_gmlvq = Pipeline(steps=[('gmlvq', gmlvq)])
-    param_grid_gmlvq = [{"gmlvq__prototype_n_per_class":prot_choice,"gmlvq__relevance_n_components":param_grid['n_comp'],
-        "gmlvq__solver_type": solvers_types, "gmlvq__activation_type": ["identity", "swish"]},
-       {"gmlvq__prototype_n_per_class":prot_choice,"gmlvq__relevance_n_components":param_grid['n_comp'],
-        "gmlvq__activation_params":[0.001,0.01,0.1,1], "gmlvq__solver_type":solvers_types, "gmlvq__activation_type": ["sigmoid"]}]
-    gmlvq_search = GridSearchCV(pipeline_gmlvq, param_grid_gmlvq, scoring=param_grid['scorer'], 
-                                cv=repeated_kfolds, return_train_score=False)
-    gmlvq_search.fit(X, Y.to_numpy())
-    df_gmlvq_search = pd.DataFrame(gmlvq_search.cv_results_)[["param_gmlvq__prototype_n_per_class","param_gmlvq__solver_type",
-            "param_gmlvq__relevance_n_components", "param_gmlvq__activation_type","mean_test_score"]]
-    df_gmlvq_search = df_gmlvq_search.rename(columns={"param_gmlvq__prototype_n_per_class": "Prot per cls",
-                        "param_gmlvq__solver_type": "Solver", "param_gmlvq__relevance_n_components":'Num Component',
-                        "param_gmlvq__activation_type":'Activation type', "mean_test_score": param_grid['scorer_name']})
-    df_gmlvq_search.sort_values(by=param_grid['scorer_name'], ascending=False, inplace=True)
-    print('GMLVQ: \n', df_gmlvq_search.head(4))
+    if param_grid['dist']=="adaptive-squared-euclidean":
+        lvq_type='GMLVQ'
+        lvq=GMLVQ(distance_type=param_grid['dist'])        
+        param_grid_lvq = [{"lvq__prototype_n_per_class":prot_choice,"lvq__relevance_n_components":param_grid['n_comp'],
+            "lvq__solver_type": solvers_types, "lvq__activation_type": ["identity", "swish"], 
+            "lvq__relevance_regularization":[0,0.001,0.01]},
+           {"lvq__prototype_n_per_class":prot_choice,"lvq__relevance_n_components":param_grid['n_comp'],
+            "lvq__activation_params":[0.1,1,2,5], "lvq__solver_type":solvers_types, "lvq__activation_type": ["sigmoid"],
+           "lvq__relevance_regularization":[0,0.001,0.01]}]
+    else:
+        lvq_type='LGMLVQ'
+        lvq=LGMLVQ(distance_type=param_grid['dist'])        
+        param_grid_lvq = [{"lvq__prototype_n_per_class":prot_choice,"lvq__relevance_n_components":param_grid['n_comp'],
+            "lvq__solver_type": solvers_types, "lvq__activation_type": ["identity", "swish"], 
+            "lvq__relevance_localization":["class", "prototypes"]},
+           {"lvq__prototype_n_per_class":prot_choice,"lvq__relevance_n_components":param_grid['n_comp'],
+            "lvq__activation_params":[0.1,1,2,5], "lvq__solver_type":solvers_types, 
+            "lvq__relevance_localization":["class", "prototypes"], "lvq__activation_type": ["sigmoid", "soft+"]}]   
+    pipeline_lvq = Pipeline(steps=[('lvq', lvq)])
+    lvq_search = GridSearchCV(pipeline_lvq, param_grid_lvq, scoring=param_grid['scorer'], 
+                                    cv=repeated_kfolds, return_train_score=False)
+    lvq_search.fit(X, Y.to_numpy())
+    if param_grid['dist']=="adaptive-squared-euclidean":
+        df_lvq_search = pd.DataFrame(lvq_search.cv_results_)[["param_lvq__prototype_n_per_class","param_lvq__solver_type",
+        "param_lvq__relevance_n_components", "param_lvq__activation_type", 
+                                                              'param_lvq__relevance_regularization', "mean_test_score"]]
+        df_lvq_search.rename(columns={"param_lvq__relevance_localization":'Localization type',
+                  "param_lvq__relevance_regularization":'Reg term' }, inplace=True)
+    else:
+        df_lvq_search = pd.DataFrame(lvq_search.cv_results_)[["param_lvq__prototype_n_per_class","param_lvq__solver_type",
+            "param_lvq__relevance_n_components", "param_lvq__activation_type", "param_lvq__relevance_localization",
+                                                              "mean_test_score"]]
+        df_lvq_search.rename(columns={"param_lvq__relevance_localization":'Localization type'}, inplace=True)    
+    df_lvq_search.rename(columns={"param_lvq__prototype_n_per_class": "Prot per cls", "param_lvq__solver_type": "Solver",
+        "param_lvq__relevance_n_components":'Num Component',"param_lvq__activation_type":'Activation type', 
+                                  "mean_test_score": param_grid['scorer_name']}, inplace=True)
+    df_lvq_search.sort_values(by=param_grid['scorer_name'], ascending=False, inplace=True)
+    print(lvq_type, lvq_search.best_params_)
+    print(df_lvq_search.head(4))
 
 def GridSearchClassifiers(X_0, Y_0, sampling_strategy, param_grid):    
     repeated_kfolds= RepeatedStratifiedKFold(n_splits=3, n_repeats=5)
