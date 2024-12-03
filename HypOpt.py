@@ -6,6 +6,7 @@ from sklearn.metrics import make_scorer, balanced_accuracy_score, confusion_matr
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV, RepeatedStratifiedKFold
 from sklearn.pipeline import make_pipeline, Pipeline
+from sklearn.linear_model import LogisticRegression
 #from imblearn.pipeline import Pipeline
 import warnings
 warnings.filterwarnings('ignore')
@@ -42,6 +43,18 @@ def ClassBalancing(X_1, Y_1, strategy):
     sm=SMOTE(sampling_strategy=strategy)
     X,Y=sm.fit_resample(X_1, Y_1)
     return X,Y
+
+def GridSearch_LRL1(X,Y,repeated_kfolds, param_grid):
+    pipe_LRL1_search = Pipeline(steps=[('LogisticRegression', LogisticRegression(penalty='l1', solver='saga',
+                                                                                    class_weight='balanced'))])
+    LRL1_param_grid = {"LogisticRegression__C" : param_grid['LRL1_C']}
+    LRL1_grid_search = GridSearchCV(pipe_LRL1_search, LRL1_param_grid, cv=repeated_kfolds, scoring=param_grid['scorer']) 
+    LRL1_grid_search.fit(X, Y)
+    df_lrl1_gs = pd.DataFrame(LRL1_grid_search.cv_results_)[
+        ["param_LogisticRegression__C","mean_test_score"]]    
+    df_lrl1_gs.rename(columns={"param_LogisticRegression__C": "C", "mean_test_score": param_grid['scorer_name']}, inplace=True)
+    df_lrl1_gs.sort_values(by=param_grid['scorer_name'], ascending=False, inplace=True)
+    return df_lrl1_gs    
 
 def GridSearch_RF(X, Y,repeated_kfolds, param_grid):
     #maa=param_grid['scorer'] 
@@ -127,17 +140,17 @@ def GridSearch_LVQ(X_0,Y_0, sampling_strategy, param_grid):
             "lvq__solver_type": solvers_types, "lvq__activation_type": ["identity", "swish"], 
             "lvq__relevance_regularization":[0,0.001,0.01]},
            {"lvq__prototype_n_per_class":prot_choice,"lvq__relevance_n_components":param_grid['n_comp'],
-            "lvq__activation_params":[0.1,1,2,5], "lvq__solver_type":solvers_types, "lvq__activation_type": ["sigmoid"],
+            "lvq__activation_params":[0.1,1,2], "lvq__solver_type":solvers_types, "lvq__activation_type": ["sigmoid"],
            "lvq__relevance_regularization":[0,0.001,0.01]}]
     else:
         lvq_type='LGMLVQ'
         lvq=LGMLVQ(distance_type=param_grid['dist'])        
         param_grid_lvq = [{"lvq__prototype_n_per_class":prot_choice,"lvq__relevance_n_components":param_grid['n_comp'],
             "lvq__solver_type": solvers_types, "lvq__activation_type": ["identity", "swish"], 
-            "lvq__relevance_localization":["class", "prototypes"]},
+            "lvq__relevance_localization":["class"]},
            {"lvq__prototype_n_per_class":prot_choice,"lvq__relevance_n_components":param_grid['n_comp'],
-            "lvq__activation_params":[0.1,1,2,5], "lvq__solver_type":solvers_types, 
-            "lvq__relevance_localization":["class", "prototypes"], "lvq__activation_type": ["sigmoid", "soft+"]}]   
+            "lvq__activation_params":[0.1,1,2], "lvq__solver_type":solvers_types, 
+            "lvq__relevance_localization":["class"], "lvq__activation_type": ["sigmoid", "soft+"]}]   
     pipeline_lvq = Pipeline(steps=[('lvq', lvq)])
     lvq_search = GridSearchCV(pipeline_lvq, param_grid_lvq, scoring=param_grid['scorer'], 
                                     cv=repeated_kfolds, return_train_score=False)
@@ -158,7 +171,7 @@ def GridSearch_LVQ(X_0,Y_0, sampling_strategy, param_grid):
                                   "mean_test_score": param_grid['scorer_name']}, inplace=True)
     df_lvq_search.sort_values(by=param_grid['scorer_name'], ascending=False, inplace=True)
     print(lvq_type, lvq_search.best_params_)
-    print(df_lvq_search.head(4))
+    return df_lvq_search
 
 def GridSearchClassifiers(X_0, Y_0, sampling_strategy, param_grid):    
     repeated_kfolds= RepeatedStratifiedKFold(n_splits=3, n_repeats=5)
@@ -174,11 +187,13 @@ def GridSearchClassifiers(X_0, Y_0, sampling_strategy, param_grid):
     X,Y=ClassBalancing(zX,Y_0, sampling_strategy)# rf_param_grid=param_grid['RF']
    # rf_param_grid['scorer']=param_grid['scorer']
     df_rf_gs=GridSearch_RF(X,Y,repeated_kfolds, param_grid)
-    print('RF: \n', df_rf_gs.head(4))
+    print('RF: \n', df_rf_gs.head(2))
+    df_lrl1_gs=GridSearch_LRL1(X,Y,repeated_kfolds, param_grid)
+    print('LogLASSO: \n', df_lrl1_gs.head(2))
     df_knn_gs=GridSearch_KNN(X,Y,repeated_kfolds, param_grid)
-    print('KNN: \n', df_knn_gs.head(4))
+    print('KNN: \n', df_knn_gs.head(2))
     df_lda_gs=GridSearch_LDA(X,Y,repeated_kfolds, param_grid)
-    print('LDA: \n', df_lda_gs.head(4))
+    print('LDA: \n', df_lda_gs.head(2))
     df_linSVM_gs, df_rbfSVM_gs= GridSearch_SVM(X,Y,repeated_kfolds, param_grid)
-    print('Linear SVM: \n', df_linSVM_gs.head(4))
-    print('RBF SVM: \n', df_rbfSVM_gs.head(4))
+    print('Linear SVM: \n', df_linSVM_gs.head(2))
+    print('RBF SVM: \n', df_rbfSVM_gs.head(2))
