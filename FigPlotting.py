@@ -56,8 +56,8 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
         labels[idx]='C%d'%(idx+1)
     ax[1].set_xticklabels(labels, fontsize=fs-1)
     ax[1].legend(fontsize=fs-3)	
-    plt.savefig('figs/PDFs/ED_%s_%s.pdf'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
-    plt.savefig('figs/PNGs/ED_%s_%s.png'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
+    plt.savefig('figs/PDFs/clustering/ED_%s_%s.pdf'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
+    plt.savefig('figs/PNGs/clustering/ED_%s_%s.png'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
     zs_ed_cluster_df=pd.DataFrame.from_dict(zs_cluster_median_profile).T
     return zs_ed_cluster_df, ed_cluster_df, colors
 
