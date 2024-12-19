@@ -51,6 +51,7 @@ def DataSetType(choice):
     else:
         df_all_combo=pd.read_csv(fileloc_data+'maskedDAIsy_MainED_Lav_SQ48_MHCSF_Visit1.tsv', sep='\t', decimal=',')        
     df_adapted_combo, colsExtracted, subscales=colsTypeCast(df_all_combo)
+    #Yreg=df_adapted_combo['EDEQ-Score']
     if choice<2:
         adapted_combo_cols=np.setdiff1d(colsExtracted, ['ED_Codes','EDtype','EDEQ-Score', 'SQ48-Score', 'MHCSF-Score',\
             'Lav-Score', 'Main-Biosex', 'Main-Education']+list(subscales['EDEQ']))
@@ -65,8 +66,7 @@ def DataSetType(choice):
         Xtrain=df_adapted_combo[adapted_combo_cols].loc[df_adapted_combo['Split']=='Train']
         Ytrain=df_adapted_combo['EDtype'].loc[df_adapted_combo['Split']=='Train']#.to_numpy()
         Xtest=df_adapted_combo[adapted_combo_cols].loc[df_adapted_combo['Split']=='Test']
-        Ytest=df_adapted_combo['EDtype'].loc[df_adapted_combo['Split']=='Test']#.to_numpy()
-        #Xtrain, XTest=df_train_adapted        
+        Ytest=df_adapted_combo['EDtype'].loc[df_adapted_combo['Split']=='Test']#.to_numpy()        
     elif choice==1.1:
         print('1.1: For dataset with Core, DT and only ED classes:\n')        
         Xtrain=df_adapted_combo[adapted_combo_cols].loc[(df_adapted_combo['Split']=='Train') & 
@@ -143,6 +143,8 @@ def DataSetType(choice):
         (df_adapted_combo['EDtype']!='Other ED')]        
     else:
         print('Not yet defined. Please check your choices')    
+    Ytrain_reg=df_adapted_combo['EDEQ-Score'].loc[df_adapted_combo['Split']=='Train']
+    Ytest_reg=df_adapted_combo['EDEQ-Score'].loc[df_adapted_combo['Split']=='Test']
     nan_mean=np.nanmean(Xtrain.to_numpy(), axis=0)
     nan_std=np.nanstd(Xtrain.to_numpy(), axis=0)
     z_train_explore_nan=((Xtrain.to_numpy()-nan_mean)/nan_std)
@@ -151,7 +153,7 @@ def DataSetType(choice):
     #print(np.shape(z_train_df), np.shape(z_test_df))
     #print(z_train_df.head(3))
     data_packet={'Xtrain': Xtrain, 'Xtest': Xtest, 'Ytrain': Ytrain, 'Ytest':Ytest,
-        'zXtrain': z_train_df, 'zXtest':z_test_df}
+        'zXtrain': z_train_df, 'zXtest':z_test_df, 'Ytrain_reg': Ytrain_reg, 'Ytest_reg': Ytest_reg}
     if z_train_df.isnull().sum().sum()>0:
         kernel_mean_match = mf.ImputationKernel(data=z_train_df,num_datasets=1,mean_match_candidates=5)
         kernel_mean_match.mice(10)
