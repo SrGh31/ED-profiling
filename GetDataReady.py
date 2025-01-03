@@ -153,7 +153,8 @@ def DataSetType(choice):
     #print(np.shape(z_train_df), np.shape(z_test_df))
     #print(z_train_df.head(3))
     data_packet={'Xtrain': Xtrain, 'Xtest': Xtest, 'Ytrain': Ytrain, 'Ytest':Ytest,
-        'zXtrain': z_train_df, 'zXtest':z_test_df, 'Ytrain_reg': Ytrain_reg, 'Ytest_reg': Ytest_reg}
+        'zXtrain': z_train_df, 'zXtest':z_test_df, 'Ytrain_reg': Ytrain_reg, 'Ytest_reg': Ytest_reg, 
+                'mean': nan_mean, 'std': nan_std}
     if z_train_df.isnull().sum().sum()>0:
         kernel_mean_match = mf.ImputationKernel(data=z_train_df,num_datasets=1,mean_match_candidates=5)
         kernel_mean_match.mice(10)
