@@ -8,6 +8,8 @@ warnings.filterwarnings('ignore')
 import time, itertools, re
 import matplotlib.patches as patches
 from scipy.cluster.hierarchy import dendrogram
+from scipy.spatial import ConvexHull
+from scipy.spatial.distance import cdist, cosine
 
 def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
     fig, ax=plt.subplots(1,2, figsize=(8,4), layout='constrained')
@@ -15,36 +17,39 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
     saveExpName, datasettag=fig_naming[0], fig_naming[1]
     zs_cluster_median_profile,EDtype_per_cluster={},{}
     data_to_plot, df, z_df, cols2train=data_tabs['data_to_plot'], data_tabs['df'], data_tabs['z_df'], data_tabs['cols2train']
-    model, pred_labels=cluster_model['model'], cluster_model['pred_labels']
+    model, train_pred_labs, test_pred_labs=cluster_model['model'], cluster_model['train_pred_labs'], cluster_model['test_pred_labs']
+    test_data_to_plot=data_tabs['test_data_to_plot']
     if cluster_model['name']=='Affinity':        
         cluster_centers_indices=cluster_model['cluster_center_indices']       
-    n_clusters_=len(np.unique(pred_labels))
+    n_clusters_=len(np.unique(train_pred_labs))
     if n_clusters_<4:
         colors = plt.cycler("color", plt.cm.Paired(np.linspace(0, 2, n_clusters_+1)))
     else:
         colors = plt.cycler("color", plt.cm.Paired(np.linspace(0, 1, n_clusters_+1)))
     for k, col in zip(range(n_clusters_), colors):
-        class_members = pred_labels == k	
+        class_members, class_members_test = train_pred_labs == k, test_pred_labs==k	  
+        cls_idx=np.where(class_members)[0]
         zs_cluster_median_profile[k]=z_df[cols2train].iloc[class_members].median(skipna=True)	
-        EDtype_per_cluster[k]=df['EDtype'].iloc[class_members].value_counts().sort_index()
-        if cluster_model['name']=='Affinity':
-	        cluster_center = data_to_plot[cluster_centers_indices[k]]
-        else:
-	        cluster_center=data_to_plot[pred_labels == k].mean(axis=0)
-        ax[0].scatter(data_to_plot[class_members, 0], data_to_plot[class_members, 1], color=col["color"], marker=".")
-        if datasettag=='combinedDataset':
-            ax[0].scatter(cluster_center[0], cluster_center[1], s=12, color=col["color"], marker="o", alpha=0.75,
-	            label='C%d (%d), ES:%.2f, LAV:%.2f, SQ48:%.2f'%(k+1, np.sum(class_members),
-		         df['EDEQ-Score'].iloc[class_members].mean(), df['Lav-Score'].iloc[class_members].mean(),
-		                            df['SQ48-Score'].iloc[class_members].mean()))
-        else:
-            ax[0].scatter(cluster_center[0], cluster_center[1], s=12, color=col["color"], marker="o", alpha=0.75,
-	            label='C%d (N=%d)'%(k+1, np.sum(class_members)))
-        for x in data_to_plot[class_members]:
-	        ax[0].plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], color=col["color"], alpha=0.5)
+        EDtype_per_cluster[k]=df['EDtype'].iloc[class_members].value_counts().sort_index()        
+        cluster_center=np.median(data_to_plot[class_members], axis=0)
+        pwdists=[np.linalg.norm(cluster_center-row) for row in data_to_plot[cls_idx,:]]
+        sort_idx=np.argsort(np.abs(pwdists))
+        pts=data_to_plot[cls_idx, 0:2]        
+        ax[0].scatter(data_to_plot[class_members, 0], data_to_plot[class_members, 1], color=col["color"], marker="o",s=5)
+        #ax[0].scatter(cluster_center[0], cluster_center[1], s=10, color=col["color"], marker="^")
+        hull = ConvexHull(pts)#ax211.tricontourf(pts[:, 0], pts[:, 1], levels=15, zorder=0, color=col["color"], alpha=0.3)        
+        #ax[2].scatter(data_to_plot[class_members, 0],data_to_plot[class_members, 1], color=col["color"], marker="o", s=8)
+        ax[0].scatter(test_data_to_plot[class_members_test, 0],test_data_to_plot[class_members_test, 1], color=col["color"], marker="+")
+        ax[0].scatter(cluster_center[0], cluster_center[1], color=col["color"], marker='^', s=16,
+                      label='C%d: N=%d (o), %d (+)'%(k+1, np.sum(class_members), np.sum(class_members_test)))        
+        ax[0].fill(pts[hull.vertices,0], pts[hull.vertices,1],color=col["color"],alpha=0.35)
+        #for x in data_to_plot[class_members]:
+	    #    ax[0].plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], color=col["color"], alpha=0.5)
     ax[0].set_xlabel(fig_lab_titles['ax0_xlab'], fontsize=fs)
     ax[0].set_ylabel(fig_lab_titles['ax0_ylab'], fontsize=fs)
-    ax[0].legend(fontsize=fs-3, ncol=ncols, loc=legend_loc)
+    #ax[2].set_xlabel(fig_lab_titles['ax0_xlab'], fontsize=fs)
+    #ax[2].set_ylabel(fig_lab_titles['ax0_ylab'], fontsize=fs)
+    ax[0].legend(fontsize=fs-3, ncol=ncols, loc=legend_loc, title='Train: o, Test: +', title_fontsize=fs-2)
     ax[0].set_title("%d %s"%(n_clusters_,fig_lab_titles['fig_title']), fontsize=fs)	
     ed_cluster_df=pd.DataFrame.from_dict(EDtype_per_cluster).T
     ed_cluster_df.rename(columns={'EDtype':'Cluster'}, inplace=True)
@@ -56,16 +61,12 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
         labels[idx]='C%d'%(idx+1)
     ax[1].set_xticklabels(labels, fontsize=fs-1)
     ax[1].legend(fontsize=fs-3)	
-    plt.savefig('figs/PDFs/clustering/ED_%s_%s.pdf'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
-    plt.savefig('figs/PNGs/clustering/ED_%s_%s.png'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
+    plt.savefig('figs/PDFs/clustering/ED_%s_%s_20250402.pdf'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
+    plt.savefig('figs/PNGs/clustering/ED_%s_%s_20250402.png'%(datasettag, saveExpName), bbox_inches='tight', dpi=200)
     zs_ed_cluster_df=pd.DataFrame.from_dict(zs_cluster_median_profile).T
     return zs_ed_cluster_df, ed_cluster_df, colors
 
-
 def plot_dendrogram(model, **kwargs):
-    # Create linkage matrix and then plot the dendrogram
-
-    # create the counts of samples under each node
     counts = np.zeros(model.children_.shape[0])
     n_samples = len(model.labels_)
     for i, merge in enumerate(model.children_):
@@ -76,11 +77,7 @@ def plot_dendrogram(model, **kwargs):
             else:
                 current_count += counts[child_idx - n_samples]
         counts[i] = current_count
-
-    linkage_matrix = np.column_stack(
-        [model.children_, model.distances_, counts]
-    ).astype(float)
-
+    linkage_matrix = np.column_stack([model.children_, model.distances_, counts]).astype(float)
     # Plot the corresponding dendrogram
     dendrogram(linkage_matrix, **kwargs)
     
