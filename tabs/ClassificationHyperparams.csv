@@ -1,0 +1,9 @@
+Model  with hyperparameters            ; Exp1.0       ;  Exp1.1  ; Exp 1.2  ; Exp2.0   ; Exp2.1   ; Exp 2.2 ; Exp3.0  ; Exp3.1  ; Exp 3.2 
+ KNN (metric, k)             ; (Minkowski , 3)  ; (cosine, 3)   ;(cosine, 3);( cosine, 3) ; (cosine, 3); (cosine, 3); (cosine, 3) ; (cosine, 3) ; (cosine, 3) 
+RF (#Trees, max features)           ;(500, 5);(500, 5) ;(100, 7);(300, 10) ;(500, 7);(500, 5);(500, 7) ;(300, 5);(300, 7) 
+LDA solver          ; SVD          ; EVD      ; SVD      ; SVD      ; SVD      ; EVD     ;  SVD    ; SVD     ; SVD     
+LogLASSO C          ;1;1;1;1;1;1;1;1;1
+SVM linear kernel C ;100;100;1;10;100;1;100;10;100
+SVM  RBF kernel (C, Gamma)   ;(100, 0.01);(100, 0.01);(100, 0.01);(100, 0.01);(100, 0.01);(100, 0.01);(10,1);(100, 0.01);(10,1)
+ GMLVQ (M, activation, solver, reg); (20, swish, adam, 0.001);(7, swish, lbfgs, 0);(15, swish, adam, 0.001);(5, swish, lbfgs, 0.001); (20, identity, lbfgs, 0) ; (15, swish, lbfgs, 0.01);(10, swish, lbfgs, 0);(7, swish, lbfgs, 0.01);(15, swish, lbfgs,0)
+LGMLVQ (M, activation, solver)  ;(10,  swish, lbfgs); (20, identity, lbfgs) ;(20,  swish, sgd); (10, identity, lbfgs);(7, swish, lbfgs); (20, swish, lbfgs)   ; (5, swish, lbfgs); (15, swish, adam)   ;(7, identity, lbfgs)
