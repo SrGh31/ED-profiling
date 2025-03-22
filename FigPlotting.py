@@ -9,7 +9,82 @@ import time, itertools, re
 import matplotlib.patches as patches
 from scipy.cluster.hierarchy import dendrogram
 from scipy.spatial import ConvexHull
+import matplotlib as mpl
 from scipy.spatial.distance import cdist, cosine
+from model_explanations import model_feature_weights
+from GetDataReady import getDataNormalized,  get_fname_exp, get_choice
+
+
+
+def clf_fig_utils(keyD:float):    
+    save_dict=get_fname_exp()
+    exp_name=save_dict[keyD]
+    dataset=getDataNormalized(keyD,0)    
+    X, Y=dataset['zXtrain'], dataset['Ytrain']
+    adapted_combo_cols, nclasses=X.columns, len(np.unique(Y))
+    ind, fs,show_col_names = np.arange(len(adapted_combo_cols)-1), 10, []
+    for idx, col in enumerate(adapted_combo_cols):
+        if (col.split('-')[0]=='Main') | (col=='DT-BMI'):
+            col=col.split('-')[1]   
+        show_col_names.append(' '.join(col.split('_')))
+    patterns = [ "/" , "++", "..", "xx", "\\" , "+" , "o", "O", "*", "|"  ]
+    colors=[np.array([228,26,28])/256, np.array([55,126,184])/256, np.array([77,175,74])/256, np.array([56,108,176])/256, 
+            np.array([255,127,0]) /256, np.array([191,91,23])/256, np.array([231,41,138])/256, np.array([247,129,191])/256]
+    fig_utils_dict={'colors': colors, 'patterns':patterns, 'show_col_names':show_col_names, 'fs':fs, 'ind': ind,
+                  }
+    return fig_utils_dict
+
+def feature_imp_glob(keyD:float, fimp_all:dict, savefig:int):    
+    use_permutation_imp, select_keys1=['RF', 'KNN','RSVC', 'LDA','GMLVQ'], ['KNN','LDA','QDA','LSVC','RSVC']
+    classifier_name1=['Random Forest', 'K-nearest neighbour', 'SVM w/ RBF','Linear Discr. Analysis','Generalized Matrix LVQ']
+    shifts, bar_width, widths, ax_all=[-0.3,-0.15,0.0,0.15,0.30],0.15, [0.18,1],[]    
+    save_dict=get_fname_exp()
+    exp_name=save_dict[keyD]    
+    fig_utils_dict=clf_fig_utils(keyD) #dataset=getDataNormalized(keyD,0)
+    fs, ind=fig_utils_dict['fs'], fig_utils_dict['ind']
+    colors, patterns, show_col_names=fig_utils_dict['colors'], fig_utils_dict['patterns'], fig_utils_dict['show_col_names']
+    fig = plt.figure(constrained_layout=True, figsize=(5,11))
+    spec = fig.add_gridspec(ncols=1, nrows=2, height_ratios=widths)
+    mpl.rcParams['hatch.linewidth'] = 0.5
+    for colnum in range(2):
+        ax_all.append(fig.add_subplot(spec[colnum]))
+    ax, rects_all, bmi_all=ax_all[1],{},{}
+    for idx,key in enumerate(select_keys1):
+        if key in use_permutation_imp:
+            bardata, err=np.mean(fimp_all[key]['All'], axis=1), np.std(fimp_all[key]['All'], axis=1)
+      #  else:
+      #      bardata, err=np.mean(fimp_all[key]['All'], axis=0), np.std(fimp_all[key]['All'], axis=0)        
+        rects_all[key] = ax.barh(ind+shifts[idx], bardata[1:], height=bar_width, xerr=err[1:], label=key, 
+                               error_kw=dict(lw=0.75, capsize=0.5, capthick=0.3), hatch=patterns[idx], color=colors[idx])        
+        ax_all[0].barh(idx, bardata[0], xerr=err[0], hatch=patterns[idx], height=bar_width*2, 
+                       color=colors[idx], error_kw=dict(lw=0.75, capsize=0.5, capthick=0.3))        
+        if idx==0:
+            ax_all[0].annotate('BMI', xy=(0.35, 0.1))
+        mean_err=(np.column_stack((bardata, err))).flatten()
+       # fimp_tabulate[key]=mean_err
+    #fimp_tabulate=pd.DataFrame.from_dict(data=fimp_tabulate).T#fimp_tabulate.columns=res_df_colname
+    ax.set_ylabel('Features', fontsize=fs)
+    ax.set_yticks(ind)
+    ax.set_yticklabels(show_col_names[1:], rotation=0, fontsize=fs)
+    ax.legend('')
+    ax.grid(axis='x')
+    ax.set_xlim(0,0.18)
+    ax.set_ylim(-0.5,len(show_col_names)-1.5)
+    ax_all[0].set_yticks(np.arange(0,len(select_keys1)))
+    ax_all[0].set_yticklabels(classifier_name1, rotation=0, fontsize=fs-1)
+    ax_all[0].set_ylabel('Classifiers', fontsize=fs+1)
+    ax_all[0].set_xlabel('importance/weight', fontsize=fs)
+    ax_all[0].grid(axis='x')
+    fig.suptitle('Overall feature importance/weight (%s)'%exp_name, fontsize=fs)
+    fig.tight_layout()
+    plt.show()
+    if savefig>0:
+        fig.savefig('figs/PDFs/classification/FIMP1%s_vert.pdf'%exp_name, bbox_inches='tight', transparent=False,
+                   pad_inches=0.01)
+        fig.savefig('figs/PNGs/classification/FIMP1_%s_vert.png'%exp_name, bbox_inches='tight', transparent=True,
+                   pad_inches=0.01)
+    
+    
 
 def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
     fig, ax=plt.subplots(1,2, figsize=(8,4), layout='constrained')
@@ -35,20 +110,14 @@ def clusterPlot(cluster_model, data_tabs, fig_naming, fig_lab_titles):
         pwdists=[np.linalg.norm(cluster_center-row) for row in data_to_plot[cls_idx,:]]
         sort_idx=np.argsort(np.abs(pwdists))
         pts=data_to_plot[cls_idx, 0:2]        
-        ax[0].scatter(data_to_plot[class_members, 0], data_to_plot[class_members, 1], color=col["color"], marker="o",s=5)
-        #ax[0].scatter(cluster_center[0], cluster_center[1], s=10, color=col["color"], marker="^")
-        hull = ConvexHull(pts)#ax211.tricontourf(pts[:, 0], pts[:, 1], levels=15, zorder=0, color=col["color"], alpha=0.3)        
-        #ax[2].scatter(data_to_plot[class_members, 0],data_to_plot[class_members, 1], color=col["color"], marker="o", s=8)
+        ax[0].scatter(data_to_plot[class_members, 0], data_to_plot[class_members, 1], color=col["color"], marker="o",s=5)        
+        hull = ConvexHull(pts)
         ax[0].scatter(test_data_to_plot[class_members_test, 0],test_data_to_plot[class_members_test, 1], color=col["color"], marker="+")
         ax[0].scatter(cluster_center[0], cluster_center[1], color=col["color"], marker='^', s=16,
                       label='C%d: N=%d (o), %d (+)'%(k+1, np.sum(class_members), np.sum(class_members_test)))        
-        ax[0].fill(pts[hull.vertices,0], pts[hull.vertices,1],color=col["color"],alpha=0.35)
-        #for x in data_to_plot[class_members]:
-	    #    ax[0].plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], color=col["color"], alpha=0.5)
+        ax[0].fill(pts[hull.vertices,0], pts[hull.vertices,1],color=col["color"],alpha=0.35)        	    
     ax[0].set_xlabel(fig_lab_titles['ax0_xlab'], fontsize=fs)
     ax[0].set_ylabel(fig_lab_titles['ax0_ylab'], fontsize=fs)
-    #ax[2].set_xlabel(fig_lab_titles['ax0_xlab'], fontsize=fs)
-    #ax[2].set_ylabel(fig_lab_titles['ax0_ylab'], fontsize=fs)
     ax[0].legend(fontsize=fs-3, ncol=ncols, loc=legend_loc, title='Train: o, Test: +', title_fontsize=fs-2)
     ax[0].set_title("%d %s"%(n_clusters_,fig_lab_titles['fig_title']), fontsize=fs)	
     ed_cluster_df=pd.DataFrame.from_dict(EDtype_per_cluster).T
